@@ -1,0 +1,28 @@
+http://localhost:2015 {
+	encode
+
+	# Homepage at /
+	handle / {
+		root * ./website/home
+		file_server
+	}
+	handle_path /home/* {
+		root * ./website/home
+		file_server
+	}
+
+	# Perlin noise at /playground/perlin_noise
+	handle /playground/perlin_noise {
+		rewrite * /index.html
+		root * ./website/playground/perlin_noise
+		file_server
+	}
+	handle_path /playground/perlin_noise/* {
+		root * ./website/playground/perlin_noise
+		file_server
+	}
+
+	handle {
+		respond "404 not found" 404
+	}
+}
